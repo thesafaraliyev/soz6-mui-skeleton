@@ -1,10 +1,7 @@
 import React from 'react';
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import Typography from "@material-ui/core/Typography";
 import Post from "../../components/Topic/Post";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Button from "@material-ui/core/Button";
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import IconButton from "@material-ui/core/IconButton";
 import HowToRegOutlinedIcon from '@material-ui/icons/HowToRegOutlined';
@@ -12,6 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import PortableWifiOffIcon from '@material-ui/icons/PortableWifiOff';
 import Divider from "@material-ui/core/Divider";
 import Pager from "../../components/Shared/etc/Pager";
+import PageTitle from "../../components/Shared/etc/PageTitle";
 
 const Topic = ({classes, match}) => {
     const topicSlug = match.params.slug;
@@ -23,11 +21,9 @@ const Topic = ({classes, match}) => {
     return (
         <div>
             <div className={classes.header}>
-                <Typography variant="h6" className={classes.headerText}>
-                    EPIC Sözlük sads ada das ddsa dsa das--- topic
-                </Typography>
+                <PageTitle title={'həyatın nə qədər cındır olduğunun anlaşıldığı anlar - topic'}/>
 
-                <div>
+                <div className={classes.buttonGroup}>
                     <IconButton>
                         <HowToRegOutlinedIcon fontSize={'small'}/>
                     </IconButton>
@@ -50,17 +46,25 @@ const Topic = ({classes, match}) => {
 
             <Divider/>
 
-            <Pager count={15} />
+            <Pager count={15}/>
         </div>
     );
 }
 
 const styles = theme => ({
     header: {
-        display: 'flex',
+        // display: 'flex',
+        [theme.breakpoints.down('xs')]: {
+            // justifyContent: 'center',
+            // textAlign: 'center',
+        },
     },
-    headerText: {
-        flexGrow: 1,
+    buttonGroup: {
+        [theme.breakpoints.down('xs')]: {
+            // display: 'flex',
+            // justifyContent: 'center',
+            // textAlign: 'center',
+        },
     },
     pagination: {
         '& > *': {
