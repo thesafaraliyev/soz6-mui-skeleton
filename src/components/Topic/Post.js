@@ -5,8 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import Actions from "./../../components/Shared/Post/Actions";
-import Header from "./../../components/Shared/Post/Header";
+import Actions from "../Shared/Post/Actions";
+import Header from "../Shared/Post/Header";
 
 const Index = ({classes}) => {
     return (

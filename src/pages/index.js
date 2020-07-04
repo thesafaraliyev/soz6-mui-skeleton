@@ -9,36 +9,11 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import BottomNav from "../components/Navigation/BottomNav";
 import Header from "../components/Navigation/Header";
 import LeftSide from "../components/Navigation/LeftSide";
-import Left from "../components/Navigation/Left";
 import RightSide from "../components/Navigation/RightSide";
 import Topic from "./Topic";
 import Advice from "./Advice";
 import Account from "./Account";
 
-
-const styles = theme => ({
-    root: {
-        display: 'flex',
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
-    bottomNav: {
-        display: 'none',
-        top: 'auto',
-        bottom: 0,
-        [theme.breakpoints.down('xs')]: {
-            display: 'block',
-        },
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(1, 2),
-        [theme.breakpoints.down('xs')]: {
-            padding: theme.spacing(1, 1),
-        },
-    },
-});
 
 const Base = ({classes, content}) => {
     const [leftSideOpen, setLeftSideOpen] = React.useState(false);
@@ -63,14 +38,13 @@ const Base = ({classes, content}) => {
                 </AppBar>
 
 
+                {/* left */}
                 <LeftSide isOpen={leftSideOpen}/>
-                {/*<Left />*/}
 
 
                 {/* content here */}
                 <main className={classes.content}>
-                    <Toolbar/>
-                    {/*<Typography paragraph>*/}
+                    <Toolbar variant={'dense'}/>
                     {/*<UserContext.Provider value={currentUser}>*/}
                     <Switch>
                         {/*<Route exact path="/" component={Topic}/>*/}
@@ -80,15 +54,41 @@ const Base = ({classes, content}) => {
                         <Route exact path="/advice/:slug/" component={Advice}/>
                     </Switch>
                     {/*</UserContext.Provider>*/}
-                    {/*</Typography>*/}
                 </main>
 
-
+                {/* right */}
                 <RightSide isOpen={rightSideOpen}/>
+
             </Router>
 
         </div>
     );
 }
+
+const styles = theme => ({
+    root: {
+        display: 'flex',
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+    },
+    bottomNav: {
+        display: 'none',
+        top: 'auto',
+        bottom: 0,
+        [theme.breakpoints.down('xs')]: {
+            display: 'block',
+        },
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(1, 2),
+        marginBottom: theme.spacing(5),
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(1, 1),
+            marginBottom: theme.spacing(10)
+        },
+    },
+});
 
 export default withStyles(styles)(Base);

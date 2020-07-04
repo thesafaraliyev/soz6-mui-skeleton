@@ -10,41 +10,23 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
-// import {useTheme} from '@material-ui/core/styles';
 import withStyles from "@material-ui/core/styles/withStyles";
+import Toolbar from "@material-ui/core/Toolbar";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
-    root: {
-        display: 'flex',
-    },
     drawer: {
         [theme.breakpoints.up('md')]: {
             width: drawerWidth,
             flexShrink: 0,
         },
     },
-    appBar: {
-        [theme.breakpoints.up('sm')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
-            marginLeft: drawerWidth,
-        },
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
-        },
-    },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
     drawerPaper: {
         width: drawerWidth,
     },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
+    drawerContainer: {
+        overflow: 'auto',
     },
 });
 
@@ -59,27 +41,28 @@ const RightSide = (props) => {
 
 
     const drawer = (
-        <div>
-            <div className={classes.toolbar}/>
-            <Divider/>
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-                        <ListItemText primary={text}/>
-                    </ListItem>
-                ))}
-            </List>
-            <Divider/>
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-                        <ListItemText primary={text}/>
-                    </ListItem>
-                ))}
-            </List>
-        </div>
+        <>
+            <Toolbar variant={'dense'}/>
+            <div className={classes.drawerContainer}>
+                <List dense={true}>
+                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+                <List>
+                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+        </>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
