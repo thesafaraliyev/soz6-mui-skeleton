@@ -13,7 +13,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const styles = theme => ({
     drawer: {
@@ -31,12 +31,10 @@ const styles = theme => ({
 });
 
 const RightSide = (props) => {
-    const {window, classes, isOpen} = props;
-    // const theme = useTheme();
-    const [mobileOpen, setMobileOpen] = React.useState(isOpen);
+    const {window, classes, isOpen, setRightSideOpen} = props;
 
     const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
+        setRightSideOpen(!isOpen);
     };
 
 
@@ -75,7 +73,7 @@ const RightSide = (props) => {
                     container={container}
                     variant="temporary"
                     anchor={"right"}
-                    open={mobileOpen}
+                    open={isOpen}
                     onClose={handleDrawerToggle}
                     classes={{
                         paper: classes.drawerPaper,

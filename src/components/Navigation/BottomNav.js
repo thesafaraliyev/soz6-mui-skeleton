@@ -14,7 +14,7 @@ const styles = theme => ({
     },
 });
 
-const BottomNav = ({classes}) => {
+const BottomNav = ({classes, setLeftSideOpen, setRightSideOpen}) => {
     const [value, setValue] = React.useState('recents');
 
     const handleChange = (event, newValue) => {
@@ -23,11 +23,20 @@ const BottomNav = ({classes}) => {
 
     return (
         <BottomNavigation value={value} showLabels onChange={handleChange} className={classes.root}>
-            <BottomNavigationAction label="Bu gün" value="recents" icon={<RestoreIcon/>}/>
+            <BottomNavigationAction
+                onClick={() => setLeftSideOpen(true)}
+                label="bu gün"
+                value="recents"
+                icon={<RestoreIcon/>}
+            />
             <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon/>}/>
             <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon/>}/>
-            <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon/>}/>
-            {/*<BottomNavigationAction label="Nearby" value="nearby2" icon={<LocationOnIcon/>}/>*/}
+            <BottomNavigationAction
+                onClick={() => setRightSideOpen(true)}
+                label="məsləhət"
+                value="folder"
+                icon={<FolderIcon/>}
+            />
         </BottomNavigation>
     );
 }

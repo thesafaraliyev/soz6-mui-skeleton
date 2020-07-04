@@ -13,11 +13,9 @@ import PageTitle from "../../components/Shared/etc/PageTitle";
 
 const Topic = ({classes, match}) => {
     const topicSlug = match.params.slug;
+    console.log(topicSlug)
 
-    const data = {
-        qu: 1,
-        test: 2,
-    };
+
     return (
         <div>
             <div className={classes.header}>

@@ -18,8 +18,8 @@ import Account from "./Account";
 const Base = ({classes, content}) => {
     const [leftSideOpen, setLeftSideOpen] = React.useState(false);
     const [rightSideOpen, setRightSideOpen] = React.useState(false);
-    console.log(leftSideOpen)
-    console.log(rightSideOpen)
+    // console.log(leftSideOpen)
+    // console.log(rightSideOpen)
 
 
     return (
@@ -29,7 +29,7 @@ const Base = ({classes, content}) => {
 
                 {/* bottom bar */}
                 <AppBar position="fixed" className={classes.bottomNav}>
-                    <BottomNav/>
+                    <BottomNav setLeftSideOpen={setLeftSideOpen} setRightSideOpen={setRightSideOpen}/>
                 </AppBar>
 
                 {/* top bar */}
@@ -39,7 +39,7 @@ const Base = ({classes, content}) => {
 
 
                 {/* left */}
-                <LeftSide isOpen={leftSideOpen}/>
+                <LeftSide setLeftSideOpen={setLeftSideOpen} isOpen={leftSideOpen}/>
 
 
                 {/* content here */}
@@ -47,7 +47,6 @@ const Base = ({classes, content}) => {
                     <Toolbar variant={'dense'}/>
                     {/*<UserContext.Provider value={currentUser}>*/}
                     <Switch>
-                        {/*<Route exact path="/" component={Topic}/>*/}
                         <Route exact path="/account/" component={Account}/>
                         {/*<Route path="/account/" render={(props) => <Account setHideLeft={setHideLeft} />} />*/}
                         <Route exact path="/topic/:slug/" component={Topic}/>
@@ -57,7 +56,7 @@ const Base = ({classes, content}) => {
                 </main>
 
                 {/* right */}
-                <RightSide isOpen={rightSideOpen}/>
+                <RightSide setRightSideOpen={setRightSideOpen} isOpen={rightSideOpen}/>
 
             </Router>
 
