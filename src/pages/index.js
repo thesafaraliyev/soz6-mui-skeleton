@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import AppBar from '@material-ui/core/AppBar';
@@ -13,13 +13,16 @@ import RightSide from "../components/Navigation/RightSide";
 import Topic from "./Topic";
 import Advice from "./Advice";
 import Account from "./Account";
+import Settings from "./Account/Settings";
+import Profile from "./Profile";
+import Messages from "./Messages";
 
 
 const Base = ({classes, content}) => {
-    const [leftSideOpen, setLeftSideOpen] = React.useState(false);
+    const leftSideRef = useRef(null);
+    const rightSideRef = useRef(null);
+    const bottomBarRef = useRef(null);
     const [rightSideOpen, setRightSideOpen] = React.useState(false);
-    // console.log(leftSideOpen)
-    // console.log(rightSideOpen)
 
 
     return (
@@ -27,19 +30,21 @@ const Base = ({classes, content}) => {
             <CssBaseline/>
             <Router>
 
+
                 {/* bottom bar */}
                 <AppBar position="fixed" className={classes.bottomNav}>
-                    <BottomNav setLeftSideOpen={setLeftSideOpen} setRightSideOpen={setRightSideOpen}/>
+                    <BottomNav leftSideRef={leftSideRef} rightSideRef={rightSideRef} ref={bottomBarRef}/>
                 </AppBar>
+
 
                 {/* top bar */}
                 <AppBar position="fixed" className={classes.appBar}>
-                    <Header setLeftSideOpen={setLeftSideOpen} setRightSideOpen={setRightSideOpen}/>
+                    <Header/>
                 </AppBar>
 
 
                 {/* left */}
-                <LeftSide setLeftSideOpen={setLeftSideOpen} isOpen={leftSideOpen}/>
+                <LeftSide ref={leftSideRef} bottomBarRef={bottomBarRef}/>
 
 
                 {/* content here */}
@@ -48,7 +53,9 @@ const Base = ({classes, content}) => {
                     {/*<UserContext.Provider value={currentUser}>*/}
                     <Switch>
                         <Route exact path="/account/" component={Account}/>
-                        {/*<Route path="/account/" render={(props) => <Account setHideLeft={setHideLeft} />} />*/}
+                        <Route exact path="/profile/" component={Profile}/>
+                        <Route exact path="/messages/" component={Messages}/>
+                        <Route exact path="/settings/" component={Settings}/>
                         <Route exact path="/topic/:slug/" component={Topic}/>
                         <Route exact path="/advice/:slug/" component={Advice}/>
                     </Switch>

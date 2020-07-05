@@ -1,6 +1,5 @@
-import React from 'react';
-import {useLocation} from 'react-router-dom';
-
+import React, {useState, forwardRef, useImperativeHandle} from 'react';
+import {Link} from "react-router-dom";
 
 import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
@@ -17,52 +16,30 @@ import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 
-const drawerWidth = 250;
 
-const styles = theme => ({
-    drawer: {
-        [theme.breakpoints.up('sm')]: {
-            width: drawerWidth,
-            flexShrink: 0,
-        },
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    drawerContainer: {
-        overflow: 'auto',
-    },
-    sideToolbar: {
-        [theme.breakpoints.down('xs')]: {
-            display: 'none',
-        },
-    },
-    carrr: {
-        margin: theme.spacing(2, 1, 0, 1),
-        // textAlign: 'center',
-        // justifyContent: 'center',
-        [theme.breakpoints.down('xs')]: {
-            margin: theme.spacing(1),
-        },
-    },
-    cardItem: {
-        textAlign: 'center',
-        justifyContent: 'center',
-        padding: theme.spacing(0),
-    },
-    list: {
-        [theme.breakpoints.down('xs')]: {
-            padding: theme.spacing(0),
-        },
-    }
-});
+const LeftSide = forwardRef((props, ref) => {
+    const {window, classes, bottomBarRef} = props;
+    const [open, setOpen] = useState(false);
 
-const LeftSide = (props) => {
-    const {window, classes, isOpen, setLeftSideOpen} = props;
 
-    const handleDrawerToggle = () => {
-        setLeftSideOpen(!isOpen);
+    const showDrawer = () => {
+        setOpen(true);
     };
+
+
+    const hideDrawer = () => {
+        setOpen(false);
+        bottomBarRef.current.clearSelected();
+    };
+
+
+    useImperativeHandle(ref, () => {
+        return {
+            showDrawer: showDrawer,
+            hideDrawer: hideDrawer,
+        };
+    });
+
 
     const drawer = (
         <>
@@ -70,7 +47,7 @@ const LeftSide = (props) => {
 
             <div className={classes.drawerContainer}>
 
-                <Card className={classes.carrr} variant='outlined'>
+                <Card className={classes.cardHeader} variant='outlined'>
                     <CardContent className={classes.cardItem}>
                         <Typography variant="body2" component="p">
                             22 yazar 33 başlıq 53 entry
@@ -87,6 +64,9 @@ const LeftSide = (props) => {
 
 
                 <List dense={true} className={classes.list}>
+                    <ListItem button key='1'  component={Link} to={'/settings/'} onClick={hideDrawer}>
+                        <ListItemText primary='Test'/>
+                    </ListItem>
                     {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemText primary={text}/>
@@ -108,8 +88,8 @@ const LeftSide = (props) => {
                     container={container}
                     variant="temporary"
                     anchor={'left'}
-                    open={isOpen}
-                    onClose={handleDrawerToggle}
+                    open={open}
+                    onClose={hideDrawer}
                     classes={{
                         paper: classes.drawerPaper,
                     }}
@@ -136,7 +116,46 @@ const LeftSide = (props) => {
             </Hidden>
         </nav>
     );
-}
+})
+
+const drawerWidth = 250;
+
+const styles = theme => ({
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    drawerContainer: {
+        overflow: 'auto',
+    },
+    sideToolbar: {
+        [theme.breakpoints.down('xs')]: {
+            display: 'none',
+        },
+    },
+    cardHeader: {
+        margin: theme.spacing(2, 1, 0, 1),
+        [theme.breakpoints.down('xs')]: {
+            margin: theme.spacing(1),
+        },
+    },
+    cardItem: {
+        textAlign: 'center',
+        justifyContent: 'center',
+        padding: theme.spacing(0),
+    },
+    list: {
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(0),
+        },
+    }
+});
+
 
 LeftSide.propTypes = {
     /**
@@ -145,5 +164,6 @@ LeftSide.propTypes = {
      */
     window: PropTypes.func,
 };
+
 
 export default withStyles(styles)(LeftSide);

@@ -11,9 +11,9 @@ import Divider from "@material-ui/core/Divider";
 import Pager from "../../components/Shared/etc/Pager";
 import PageTitle from "../../components/Shared/etc/PageTitle";
 
+
 const Topic = ({classes, match}) => {
-    const topicSlug = match.params.slug;
-    console.log(topicSlug)
+    // const slug = match.params.slug;
 
 
     return (
@@ -49,6 +49,7 @@ const Topic = ({classes, match}) => {
     );
 }
 
+
 const styles = theme => ({
     header: {
         // display: 'flex',
@@ -73,5 +74,6 @@ const styles = theme => ({
         alignItems: 'center',
     }
 });
+
 
 export default withStyles(styles)(Topic);

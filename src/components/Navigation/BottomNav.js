@@ -1,12 +1,71 @@
-import React from 'react';
+import React, {useState, forwardRef, useImperativeHandle} from 'react';
+import {Link} from "react-router-dom";
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import FolderIcon from '@material-ui/icons/Folder';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import ContactSupportOutlinedIcon from '@material-ui/icons/ContactSupportOutlined';
+import CalendarViewDayOutlinedIcon from '@material-ui/icons/CalendarViewDayOutlined';
+import QuestionAnswerOutlinedIcon from '@material-ui/icons/QuestionAnswerOutlined';
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import withStyles from "@material-ui/core/styles/withStyles";
+
+
+const BottomNav = forwardRef(({classes, leftSideRef, rightSideRef}, ref) => {
+    const [bottomBarValue, setBottomBarValue] = useState(null);
+
+
+    const handleBottomBarChange = (event, newValue) => {
+        setBottomBarValue(newValue);
+    };
+
+    const clearSelected = () => {
+        setBottomBarValue(null);
+    };
+
+    useImperativeHandle(ref, () => {
+        return {
+            clearSelected: clearSelected,
+        };
+    });
+
+
+    return (
+        <BottomNavigation value={bottomBarValue} showLabels onChange={handleBottomBarChange} className={classes.root}>
+
+            <BottomNavigationAction
+                onClick={() => leftSideRef.current.showDrawer()}
+                label="bu gün"
+                value="today"
+                icon={<CalendarViewDayOutlinedIcon/>}
+            />
+
+            <BottomNavigationAction
+                component={Link}
+                to={'/messages/'}
+                label="mesajlar"
+                value="messages"
+                icon={<QuestionAnswerOutlinedIcon/>}
+            />
+
+            <BottomNavigationAction
+                component={Link}
+                to={'/account/'}
+                label="mən"
+                value="me"
+                icon={<AccountCircleOutlinedIcon/>}
+            />
+
+            <BottomNavigationAction
+                // onClick={() => setRightSideOpen(true)}
+                label="məsləhətxana"
+                value="advice"
+                icon={<ContactSupportOutlinedIcon/>}
+            />
+
+        </BottomNavigation>
+    );
+})
+
 
 const styles = theme => ({
     root: {
@@ -14,31 +73,5 @@ const styles = theme => ({
     },
 });
 
-const BottomNav = ({classes, setLeftSideOpen, setRightSideOpen}) => {
-    const [value, setValue] = React.useState('recents');
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    return (
-        <BottomNavigation value={value} showLabels onChange={handleChange} className={classes.root}>
-            <BottomNavigationAction
-                onClick={() => setLeftSideOpen(true)}
-                label="bu gün"
-                value="recents"
-                icon={<RestoreIcon/>}
-            />
-            <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon/>}/>
-            <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon/>}/>
-            <BottomNavigationAction
-                onClick={() => setRightSideOpen(true)}
-                label="məsləhət"
-                value="folder"
-                icon={<FolderIcon/>}
-            />
-        </BottomNavigation>
-    );
-}
 
 export default withStyles(styles)(BottomNav);

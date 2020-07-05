@@ -5,14 +5,14 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 
-const Account = ({classes}) => {
+const Messages = ({classes}) => {
     return (
         <div className={classes.root}>
             <Typography variant="h5" gutterBottom className={classes.root}>
-                EPIC Sözlük --- account
+                EPIC Sözlük --- messages
             </Typography>
 
-            <Button component={Link} to={'/settings/'}>Settings</Button>
+            <Button component={Link} to={'/profile/'}>Profile</Button>
             {/*<Post/>*/}
 
         </div>
@@ -22,4 +22,4 @@ const Account = ({classes}) => {
 const styles = theme => ({
 });
 
-export default withStyles(styles)(Account);
+export default withStyles(styles)(Messages);
