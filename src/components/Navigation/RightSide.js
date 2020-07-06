@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, forwardRef, useImperativeHandle} from 'react';
 
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
@@ -12,8 +12,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
+import {Link} from "react-router-dom";
 
-const drawerWidth = 250;
+const drawerWidth = 270;
 
 const styles = theme => ({
     drawer: {
@@ -30,12 +31,28 @@ const styles = theme => ({
     },
 });
 
-const RightSide = (props) => {
-    const {window, classes, isOpen, setRightSideOpen} = props;
+const RightSide = forwardRef((props, ref) => {
+    const {window, classes, bottomBarRef} = props;
+    const [open, setOpen] = useState(false);
 
-    const handleDrawerToggle = () => {
-        setRightSideOpen(!isOpen);
+
+    const showDrawer = () => {
+        setOpen(true);
     };
+
+
+    const hideDrawer = () => {
+        setOpen(false);
+        bottomBarRef.current.clearSelected();
+    };
+
+
+    useImperativeHandle(ref, () => {
+        return {
+            showDrawer: showDrawer,
+            hideDrawer: hideDrawer,
+        };
+    });
 
 
     const drawer = (
@@ -43,9 +60,11 @@ const RightSide = (props) => {
             <Toolbar variant={'dense'}/>
             <div className={classes.drawerContainer}>
                 <List dense={true}>
+                    <ListItem button key='1'  component={Link} to={'/advice/meslehet-1'} onClick={hideDrawer}>
+                        <ListItemText primary='məsləhət 1'/>
+                    </ListItem>
                     {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                         <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
@@ -54,7 +73,7 @@ const RightSide = (props) => {
                 <List>
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
                         <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                            {/*<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>*/}
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
@@ -73,8 +92,8 @@ const RightSide = (props) => {
                     container={container}
                     variant="temporary"
                     anchor={"right"}
-                    open={isOpen}
-                    onClose={handleDrawerToggle}
+                    open={open}
+                    onClose={hideDrawer}
                     classes={{
                         paper: classes.drawerPaper,
                     }}
@@ -100,7 +119,8 @@ const RightSide = (props) => {
             </Hidden>
         </nav>
     );
-}
+});
+
 
 RightSide.propTypes = {
     /**

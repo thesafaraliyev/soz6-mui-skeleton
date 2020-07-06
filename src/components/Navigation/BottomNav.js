@@ -5,9 +5,11 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import ContactSupportOutlinedIcon from '@material-ui/icons/ContactSupportOutlined';
 import CalendarViewDayOutlinedIcon from '@material-ui/icons/CalendarViewDayOutlined';
-import QuestionAnswerOutlinedIcon from '@material-ui/icons/QuestionAnswerOutlined';
+import TextsmsOutlinedIcon from '@material-ui/icons/TextsmsOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import withStyles from "@material-ui/core/styles/withStyles";
+import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
+import Badge from "@material-ui/core/Badge";
 
 
 const BottomNav = forwardRef(({classes, leftSideRef, rightSideRef}, ref) => {
@@ -44,19 +46,19 @@ const BottomNav = forwardRef(({classes, leftSideRef, rightSideRef}, ref) => {
                 to={'/messages/'}
                 label="mesajlar"
                 value="messages"
-                icon={<QuestionAnswerOutlinedIcon/>}
+                icon={<TextsmsOutlinedIcon/>}
             />
 
             <BottomNavigationAction
                 component={Link}
-                to={'/account/'}
-                label="mən"
-                value="me"
-                icon={<AccountCircleOutlinedIcon/>}
+                to={'/notifications/'}
+                label="bildirşlər"
+                value="noti"
+                icon={<NotificationsNoneOutlinedIcon/>}
             />
 
             <BottomNavigationAction
-                // onClick={() => setRightSideOpen(true)}
+                onClick={() => rightSideRef.current.showDrawer()}
                 label="məsləhətxana"
                 value="advice"
                 icon={<ContactSupportOutlinedIcon/>}

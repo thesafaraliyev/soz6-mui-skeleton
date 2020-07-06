@@ -16,13 +16,13 @@ import Account from "./Account";
 import Settings from "./Account/Settings";
 import Profile from "./Profile";
 import Messages from "./Messages";
+import Notifications from "./Notifications";
 
 
 const Base = ({classes, content}) => {
     const leftSideRef = useRef(null);
     const rightSideRef = useRef(null);
     const bottomBarRef = useRef(null);
-    const [rightSideOpen, setRightSideOpen] = React.useState(false);
 
 
     return (
@@ -39,7 +39,7 @@ const Base = ({classes, content}) => {
 
                 {/* top bar */}
                 <AppBar position="fixed" className={classes.appBar}>
-                    <Header/>
+                    <Header bottomBarRef={bottomBarRef}/>
                 </AppBar>
 
 
@@ -53,9 +53,10 @@ const Base = ({classes, content}) => {
                     {/*<UserContext.Provider value={currentUser}>*/}
                     <Switch>
                         <Route exact path="/account/" component={Account}/>
+                        <Route exact path="/settings/" component={Settings}/>
                         <Route exact path="/profile/" component={Profile}/>
                         <Route exact path="/messages/" component={Messages}/>
-                        <Route exact path="/settings/" component={Settings}/>
+                        <Route exact path="/notifications/" component={Notifications}/>
                         <Route exact path="/topic/:slug/" component={Topic}/>
                         <Route exact path="/advice/:slug/" component={Advice}/>
                     </Switch>
@@ -63,7 +64,7 @@ const Base = ({classes, content}) => {
                 </main>
 
                 {/* right */}
-                <RightSide setRightSideOpen={setRightSideOpen} isOpen={rightSideOpen}/>
+                <RightSide ref={rightSideRef} bottomBarRef={bottomBarRef}/>
 
             </Router>
 

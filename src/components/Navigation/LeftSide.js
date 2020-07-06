@@ -15,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
 
 
 const LeftSide = forwardRef((props, ref) => {
@@ -64,8 +65,8 @@ const LeftSide = forwardRef((props, ref) => {
 
 
                 <List dense={true} className={classes.list}>
-                    <ListItem button key='1'  component={Link} to={'/settings/'} onClick={hideDrawer}>
-                        <ListItemText primary='Test'/>
+                    <ListItem button key='1'  component={Link} to={'/topic/epic-sozluk'} onClick={hideDrawer}>
+                        <ListItemText primary='həyatın nə qədər cındır olduğunun anlaşıldığı anlar'/>
                     </ListItem>
                     {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                         <ListItem button key={text}>
@@ -118,7 +119,7 @@ const LeftSide = forwardRef((props, ref) => {
     );
 })
 
-const drawerWidth = 250;
+const drawerWidth = 270;
 
 const styles = theme => ({
     drawer: {

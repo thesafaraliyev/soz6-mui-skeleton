@@ -1,5 +1,5 @@
 import React from 'react';
-// import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import {fade} from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,10 +16,10 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import SportsKabaddiOutlinedIcon from '@material-ui/icons/SportsKabaddiOutlined';
 import withStyles from "@material-ui/core/styles/withStyles";
-import {Link} from "react-router-dom";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 
-const Header = ({classes}) => {
+const Header = ({classes, bottomBarRef}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -111,6 +111,7 @@ const Header = ({classes}) => {
                     color="inherit"
                     component={Link}
                     to={'/'}
+                    onClick={event => bottomBarRef.current.clearSelected()}
                 >
                     <SportsKabaddiOutlinedIcon/>
                 </IconButton>
@@ -139,22 +140,18 @@ const Header = ({classes}) => {
                 {/* desktop right buttons */}
                 <div className={classes.sectionDesktop}>
 
-                    <IconButton aria-label="show 17 new notifications" color="inherit" component={Link} to={'/account/'}>
+                    <IconButton aria-label="show 4 new mails" color="inherit" component={Link} to={'/messages/'}>
+                        <Badge badgeContent={4} color="secondary">
+                            <MailIcon/>
+                        </Badge>
+                    </IconButton>
+
+                    <IconButton aria-label="show 17 new notifications" color="inherit" component={Link} to={'/notifications/'}>
                         <Badge badgeContent={17} color="secondary">
                             <NotificationsIcon/>
                         </Badge>
                     </IconButton>
 
-                    <IconButton aria-label="show 4 new mails" color="inherit" component={Link} to={'/topic/epic-sozluk'}>
-                        <Badge badgeContent={4} color="secondary">
-                            <MailIcon/>
-                        </Badge>
-                    </IconButton>
-                    <IconButton aria-label="show 17 new notifications" color="inherit" component={Link} to={'/advice/babatdi'}>
-                        <Badge badgeContent={17} color="secondary">
-                            <NotificationsIcon/>
-                        </Badge>
-                    </IconButton>
                     <IconButton
                         edge="end"
                         aria-label="account of current user"
@@ -180,6 +177,18 @@ const Header = ({classes}) => {
                     </IconButton>
                 </div>
 
+
+                {/* account */}
+                <IconButton
+                    edge="end"
+                    className={classes.mobileAccountButton}
+                    color="inherit"
+                    component={Link}
+                    to={'/account/'}
+                    onClick={event => bottomBarRef.current.clearSelected()}
+                >
+                    <AccountCircleIcon/>
+                </IconButton>
 
             </Toolbar>
             {renderMobileMenu}
@@ -258,6 +267,12 @@ const styles = theme => ({
         },
         [theme.breakpoints.down('xs')]: {
             display: 'none',
+        },
+    },
+    mobileAccountButton: {
+        display: 'none',
+        [theme.breakpoints.down('xs')]: {
+            display: 'block',
         },
     },
 });
