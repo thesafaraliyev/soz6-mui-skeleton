@@ -1,78 +1,116 @@
 import React from 'react';
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import Post from "../../components/Topic/Post";
-import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
-import IconButton from "@material-ui/core/IconButton";
-import HowToRegOutlinedIcon from '@material-ui/icons/HowToRegOutlined';
-import SearchIcon from '@material-ui/icons/Search';
-import PortableWifiOffIcon from '@material-ui/icons/PortableWifiOff';
 import Divider from "@material-ui/core/Divider";
-import Pager from "../../components/Shared/etc/Pager";
-import PageTitle from "../../components/Shared/etc/PageTitle";
+import Typography from "@material-ui/core/Typography";
+
+import Pager from "../../components/Shared/Pager";
+import Toolbar from "@material-ui/core/Toolbar";
+import {LEFT_SIDE_CONTENT} from '../Home'
+import LeftSide from "../../components/Navigation/LeftSide";
+import RightSide from "../../components/Navigation/RightSide";
+import PostCard from "../../components/Topic/PostCard";
+import Actions from "../../components/Topic/Actions";
+import CategoryChipSet from "../../components/Topic/CategoryChipSet";
+
+
+export const RIGHT_SIDE_CONTENT = [
+    {
+        id: 1,
+        title: 'avropaya türkiye vasitesile gediş',
+        slug: 'avropaya-turkiye-vasitesile-gedis',
+        count: 3,
+    },
+    {
+        id: 2,
+        title: 'bunun kimi qafqaz folk musiqilər',
+        slug: 'bunun-kimi-qafqaz-folk-musiqiler',
+        count: 0,
+    },
+    {
+        id: 3,
+        title: 'souls-like oyunlar necə oynanılır?',
+        slug: 'souls-like-oyunlar-nece-oynanilir',
+        count: 4,
+    },
+    {
+        id: 4,
+        title: 'valyuta',
+        slug: 'valyuta',
+        count: 0,
+    },
+    {
+        id: 5,
+        title: 'walmart-dan noutbuk almaq',
+        slug: 'walmart-dan-noutbuk-almaq',
+        count: 2,
+    },
+];
 
 
 const Topic = ({classes, match}) => {
-    // const slug = match.params.slug;
-
+    const slug = match.params.slug;
 
     return (
-        <div>
-            <div className={classes.header}>
-                <PageTitle title={'həyatın nə qədər cındır olduğunun anlaşıldığı anlar - topic'}/>
+        <>
+            {/* left */}
+            <LeftSide content={LEFT_SIDE_CONTENT}/>
 
-                <div className={classes.buttonGroup}>
-                    <IconButton>
-                        <HowToRegOutlinedIcon fontSize={'small'}/>
-                    </IconButton>
-                    <IconButton>
-                        <VisibilityOutlinedIcon fontSize={'small'}/>
-                    </IconButton>
-                    <IconButton>
-                        <PortableWifiOffIcon fontSize={'small'}/>
-                    </IconButton>
-                    <IconButton>
-                        <SearchIcon fontSize={'small'}/>
-                    </IconButton>
+
+            {/* content here */}
+            <main className={classes.content}>
+                <Toolbar variant={'dense'}/>
+
+                <div className={classes.header}>
+                    <Typography variant="h6" className={classes.headerText}>{slug}</Typography>
+
+                    <CategoryChipSet/>
+
+                    <Actions/>
                 </div>
-            </div>
 
 
-            <Post/>
-            <Post/>
-            <Post/>
+                <div className={classes.postCard}>
+                    <PostCard/>
+                    <PostCard/>
+                    <PostCard/>
+                    <PostCard/>
+                    <PostCard/>
+                    <PostCard/>
+                    <PostCard/>
+                    <PostCard/>
+                    <PostCard/>
+                    <PostCard/>
+                </div>
 
-            <Divider/>
+                <Divider/>
 
-            <Pager count={15}/>
-        </div>
+                <Pager count={15}/>
+
+            </main>
+
+            {/* right */}
+            <RightSide content={RIGHT_SIDE_CONTENT}/>
+
+        </>
     );
 }
 
 
 const styles = theme => ({
     header: {
-        // display: 'flex',
+    },
+    postCard: {
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(1, 2),
+        marginBottom: theme.spacing(5),
         [theme.breakpoints.down('xs')]: {
-            // justifyContent: 'center',
-            // textAlign: 'center',
+            padding: theme.spacing(1, 1),
+            marginBottom: theme.spacing(10)
         },
     },
-    buttonGroup: {
-        [theme.breakpoints.down('xs')]: {
-            // display: 'flex',
-            // justifyContent: 'center',
-            // textAlign: 'center',
-        },
-    },
-    pagination: {
-        '& > *': {
-            marginTop: theme.spacing(2),
-        },
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
 });
 
 

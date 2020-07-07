@@ -1,4 +1,4 @@
-import React, {useState, forwardRef, useImperativeHandle} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 
 import PropTypes from 'prop-types';
@@ -7,39 +7,20 @@ import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import withStyles from "@material-ui/core/styles/withStyles";
 
 
-const LeftSide = forwardRef((props, ref) => {
-    const {window, classes, bottomBarRef} = props;
-    const [open, setOpen] = useState(false);
+const LeftSide = ({window, classes, content = []}) => {
+    const [dropDownOpen, setDropDownOpen] = useState(false);
 
-
-    const showDrawer = () => {
-        setOpen(true);
+    const handleDropDownClick = () => {
+        setDropDownOpen(!dropDownOpen);
     };
-
-
-    const hideDrawer = () => {
-        setOpen(false);
-        bottomBarRef.current.clearSelected();
-    };
-
-
-    useImperativeHandle(ref, () => {
-        return {
-            showDrawer: showDrawer,
-            hideDrawer: hideDrawer,
-        };
-    });
 
 
     const drawer = (
@@ -48,59 +29,91 @@ const LeftSide = forwardRef((props, ref) => {
 
             <div className={classes.drawerContainer}>
 
-                <Card className={classes.cardHeader} variant='outlined'>
-                    <CardContent className={classes.cardItem}>
-                        <Typography variant="body2" component="p">
-                            22 yazar 33 başlıq 53 entry
-                        </Typography>
-                    </CardContent>
-                    <Divider/>
+                {/*<Card className={classes.cardHeader} variant='outlined'>*/}
+                {/*    <CardContent className={classes.cardItem}>*/}
+                {/*        <Typography variant="body2" component="p">*/}
+                {/*            22 yazar 33 başlıq 53 entry*/}
+                {/*        </Typography>*/}
+                {/*    </CardContent>*/}
+                {/*    <Divider/>*/}
 
-                    <CardActions className={classes.cardItem}>
-                        <Button size="small" color='primary'>yenilə</Button>
-                        <Button size="small" color='primary'>gündəm</Button>
-                        <Button size="small" color='primary'>top</Button>
-                    </CardActions>
-                </Card>
+                {/*    <CardActions className={classes.cardItem}>*/}
+                {/*        <Button size="small" color='primary'>yenilə</Button>*/}
+                {/*        <Button size="small" color='primary'>gündəm</Button>*/}
+                {/*        <Button size="small" color='primary'>top</Button>*/}
+                {/*    </CardActions>*/}
+                {/*</Card>*/}
+
+                <List
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
+                    dense={true}
+                    className={classes.list}
+                >
+                    <ListItem button onClick={handleDropDownClick}>
+                        <ListItemText primary="filter"/>
+                        {dropDownOpen ? <ExpandLess/> : <ExpandMore/>}
+                    </ListItem>
+
+                    <Collapse in={dropDownOpen} timeout="auto" unmountOnExit>
+                        <List
+                            component="div"
+                            disablePadding
+                            dense={true}
+                            className={classes.list}
+                        >
+                            <ListItem button className={classes.nested}>
+                                <ListItemText primary="bugün"/>
+                            </ListItem>
+                            <ListItem button className={classes.nested}>
+                                <ListItemText primary="təsadüfi"/>
+                            </ListItem>
+                        </List>
+                    </Collapse>
+                </List>
+
+                <Divider/>
 
 
                 <List dense={true} className={classes.list}>
-                    <ListItem button key='1'  component={Link} to={'/topic/epic-sozluk'} onClick={hideDrawer}>
-                        <ListItemText primary='həyatın nə qədər cındır olduğunun anlaşıldığı anlar'/>
-                    </ListItem>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text}/>
+                    {content.map((listItem, index) => (
+                        <ListItem
+                            button
+                            key={listItem.id}
+                            component={Link} to={`/topic/${listItem.slug}/`}
+                        >
+                            <ListItemText primary={listItem.title}/>
                         </ListItem>
                     ))}
                 </List>
+
             </div>
         </>
     );
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    // const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
         <nav className={classes.drawer} aria-label="mailbox folders">
             {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
             {/* mobile */}
-            <Hidden smUp implementation="css">
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    anchor={'left'}
-                    open={open}
-                    onClose={hideDrawer}
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                >
-                    {drawer}
-                </Drawer>
-            </Hidden>
+            {/*<Hidden smUp implementation="css">*/}
+            {/*    <Drawer*/}
+            {/*        container={container}*/}
+            {/*        variant="temporary"*/}
+            {/*        anchor={'left'}*/}
+            {/*        open={false}*/}
+            {/*        // onClose={hideDrawer}*/}
+            {/*        classes={{*/}
+            {/*            paper: classes.drawerPaper,*/}
+            {/*        }}*/}
+            {/*        ModalProps={{*/}
+            {/*            keepMounted: true, // Better open performance on mobile.*/}
+            {/*        }}*/}
+            {/*    >*/}
+            {/*        {drawer}*/}
+            {/*    </Drawer>*/}
+            {/*</Hidden>*/}
 
             {/* desktop */}
             <Hidden xsDown implementation="css">
@@ -117,9 +130,10 @@ const LeftSide = forwardRef((props, ref) => {
             </Hidden>
         </nav>
     );
-})
+};
 
-const drawerWidth = 270;
+
+const drawerWidth = 300;
 
 const styles = theme => ({
     drawer: {
@@ -154,7 +168,10 @@ const styles = theme => ({
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(0),
         },
-    }
+    },
+    nested: {
+        paddingLeft: theme.spacing(4),
+    },
 });
 
 

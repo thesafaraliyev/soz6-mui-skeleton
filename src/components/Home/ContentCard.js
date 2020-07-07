@@ -8,10 +8,14 @@ import CardContent from '@material-ui/core/CardContent';
 import Actions from "../Shared/Post/Actions";
 import Header from "../Shared/Post/Header";
 
-const Index = ({classes}) => {
+
+const ContentCard = ({classes}) => {
     return (
         <Card className={classes.root} variant="outlined">
-            {/* user and post date */}
+            <Typography variant="body1" className={classes.topicTitle}>
+                hər gün kənara bir manat atmaq
+            </Typography>
+
             <Header/>
 
             {/* post content */}
@@ -40,15 +44,19 @@ const styles = theme => ({
         marginBottom: theme.spacing(2),
     },
     contentCard: {
-        padding: theme.spacing(1, 2, 0, 2),
-    },
-    classActions: {
+        margin: theme.spacing(0, 1.5),
+        padding: theme.spacing(0),
         [theme.breakpoints.down('xs')]: {
-            display: 'flex',
-            justifyContent: 'center',
-            textAlign: 'center',
+            margin: theme.spacing(0, 1),
         },
-    }
+    },
+    topicTitle: {
+        margin: theme.spacing(1, 1.5),
+        fontSize: '1.1rem',
+        [theme.breakpoints.down('xs')]: {
+            margin: theme.spacing(1),
+        },
+    },
 });
 
-export default withStyles(styles)(Index);
+export default withStyles(styles)(ContentCard);

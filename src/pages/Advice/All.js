@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 
 import withStyles from "@material-ui/core/styles/withStyles";
+import Post from "../../components/Topic/Post";
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import IconButton from "@material-ui/core/IconButton";
 import HowToRegOutlinedIcon from '@material-ui/icons/HowToRegOutlined';
@@ -11,48 +12,49 @@ import Pager from "../../components/Shared/etc/Pager";
 import PageTitle from "../../components/Shared/etc/PageTitle";
 import LeftSide from "../../components/Navigation/LeftSide";
 import Toolbar from "@material-ui/core/Toolbar";
-
+import {BrowserRouter as Router, Link} from "react-router-dom";
 import RightSide from "../../components/Navigation/RightSide";
-import {LEFT_SIDE_CONTENT} from '../Home'
-import {RIGHT_SIDE_CONTENT} from '../Topic'
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
-import Post from "../../components/Advice/Post";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 
-
-const Topic = ({classes, match}) => {
-    const slug = match.params.slug;
-    const content = {
-        id: 1,
-        title: slug,
-        content: 'ala indi bir poxdu yemişəm souls-like oyun oynamaq istəyirəm. nəsə mortal shell açıq beta olub bu gün onu oynadım. sualım budur ki, belə oyunlar əsasən necə oynanılır, gamepad\'la yoxsa klaviuatura mouse\'la? yəni belə bilirəm oynayan ikisi ilə də oynayar. amma məsələn futbol oyunlarını da hər iki yolla oynamaq olur pc-də amma hamı gamepad\'la oynayır yəni, oyun ona görə qurulub -* belə youtube\'da falan baxdıqlarım çoxu gamepad\'la oynayır deyə tərəddüd içində qaldım.'
-    };
+const Advices = ({classes}) => {
+    // const slug = match.params.slug;
+    const leftSideRef = useRef(null);
+    const rightSideRef = useRef(null);
+    const bottomBarRef = useRef(null);
 
     return (
         <>
 
+
+
             {/* left */}
-            <LeftSide content={LEFT_SIDE_CONTENT}/>
+            <LeftSide/>
 
 
             {/* content here */}
             <main className={classes.content}>
                 <Toolbar variant={'dense'}/>
-                <Post content={content}/>
+
+                <List dense={true}>
+                    <ListItem button key='1'  component={Link} to={'/advice/meslehet-1'}>
+                        <ListItemText primary='məsləhət 1'/>
+                    </ListItem>
+                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
 
 
-                {/*<Divider/>*/}
-
-                {/*<Pager count={15}/>*/}
 
             </main>
 
             {/* right */}
-            <RightSide content={RIGHT_SIDE_CONTENT}/>
+            <RightSide/>
 
         </>
     );
@@ -94,4 +96,4 @@ const styles = theme => ({
 });
 
 
-export default withStyles(styles)(Topic);
+export default withStyles(styles)(Advices);

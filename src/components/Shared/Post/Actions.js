@@ -31,15 +31,14 @@ const Actions = ({classes}) => {
             <IconButton color="primary">
                 <MoreHorizOutlinedIcon fontSize={'small'}/>
             </IconButton>
-            {/*<Button size="small" color="primary">*/}
-            {/*    Share*/}
-            {/*</Button>*/}
         </CardActions>
     );
 }
 
 const styles = theme => ({
     classActions: {
+        padding: theme.spacing(0),
+        margin: theme.spacing(0.5, 1.5),
         [theme.breakpoints.down('xs')]: {
             display: 'flex',
             justifyContent: 'center',

@@ -111,12 +111,19 @@ const Header = ({classes, bottomBarRef}) => {
                     color="inherit"
                     component={Link}
                     to={'/'}
-                    onClick={event => bottomBarRef.current.clearSelected()}
+                    // onClick={event => bottomBarRef.current.clearSelected()}
                 >
                     <SportsKabaddiOutlinedIcon/>
                 </IconButton>
 
-                <Typography className={classes.title} variant="h6" noWrap>
+                <Typography
+                    className={classes.title}
+                    variant="h6"
+                    color='inherit'
+                    noWrap
+                    component={Link}
+                    to={'/'}
+                >
                     EPIC Sözlük
                 </Typography>
 
@@ -146,7 +153,8 @@ const Header = ({classes, bottomBarRef}) => {
                         </Badge>
                     </IconButton>
 
-                    <IconButton aria-label="show 17 new notifications" color="inherit" component={Link} to={'/notifications/'}>
+                    <IconButton aria-label="show 17 new notifications" color="inherit" component={Link}
+                                to={'/notifications/'}>
                         <Badge badgeContent={17} color="secondary">
                             <NotificationsIcon/>
                         </Badge>
@@ -185,7 +193,7 @@ const Header = ({classes, bottomBarRef}) => {
                     color="inherit"
                     component={Link}
                     to={'/account/'}
-                    onClick={event => bottomBarRef.current.clearSelected()}
+                    // onClick={event => bottomBarRef.current.clearSelected()}
                 >
                     <AccountCircleIcon/>
                 </IconButton>
@@ -206,6 +214,7 @@ const styles = theme => ({
         // marginRight: theme.spacing(2),
     },
     title: {
+        textDecoration: 'none',
         display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',

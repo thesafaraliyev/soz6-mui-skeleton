@@ -6,6 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 const theme = createMuiTheme({
     palette: {
+        // type: 'dark',
         primary: {
             // light: blue[500],
             // main: blue[500],
@@ -19,7 +20,26 @@ const theme = createMuiTheme({
             light: orange[300],
             main: orange[500],
             dark: orange[700]
-        }
+        },
+        // text: {
+        //     primary: '#fff',
+        //     secondary: 'rgba(255, 255, 255, 0.7)',
+        //     disabled: 'rgba(255, 255, 255, 0.5)',
+        // },
+        // action: {
+        //     active: '#fff',
+        //     hover: 'rgba(255, 255, 255, 0.08)',
+        //     selected: 'rgba(255, 255, 255, 0.16)',
+        //     disabled: 'rgba(255, 255, 255, 0.3)',
+        //     disabledBackground: 'rgba(255, 255, 255, 0.12)',
+        // },
+        // background: {
+        //     default: '#303030',
+        //     paper: '#424242',
+        // },
+        // divider: 'rgba(255, 255, 255, 0.12)',
+        // https://material-ui.com/customization/palette/#dark-mode
+
     },
     typography: {
         useNextVariants: true
