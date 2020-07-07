@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import Actions from "../Shared/Post/Actions";
+import CardActions from "../Home/CardActions";
 import Header from "../Shared/Post/Header";
 
 
@@ -32,7 +32,7 @@ const ContentCard = ({classes}) => {
                 </Typography>
             </CardContent>
 
-            <Actions/>
+            <CardActions/>
         </Card>
     );
 }

@@ -3,49 +3,17 @@ import React from 'react';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-
 import Pager from "../../components/Shared/Pager";
 import Toolbar from "@material-ui/core/Toolbar";
-import {LEFT_SIDE_CONTENT} from '../Home'
+
 import LeftSide from "../../components/Navigation/LeftSide";
 import RightSide from "../../components/Navigation/RightSide";
 import PostCard from "../../components/Topic/PostCard";
 import Actions from "../../components/Topic/Actions";
 import CategoryChipSet from "../../components/Topic/CategoryChipSet";
 
-
-export const RIGHT_SIDE_CONTENT = [
-    {
-        id: 1,
-        title: 'avropaya türkiye vasitesile gediş',
-        slug: 'avropaya-turkiye-vasitesile-gedis',
-        count: 3,
-    },
-    {
-        id: 2,
-        title: 'bunun kimi qafqaz folk musiqilər',
-        slug: 'bunun-kimi-qafqaz-folk-musiqiler',
-        count: 0,
-    },
-    {
-        id: 3,
-        title: 'souls-like oyunlar necə oynanılır?',
-        slug: 'souls-like-oyunlar-nece-oynanilir',
-        count: 4,
-    },
-    {
-        id: 4,
-        title: 'valyuta',
-        slug: 'valyuta',
-        count: 0,
-    },
-    {
-        id: 5,
-        title: 'walmart-dan noutbuk almaq',
-        slug: 'walmart-dan-noutbuk-almaq',
-        count: 2,
-    },
-];
+import {LEFT_SIDE_CONTENT} from '../Home'
+import {RIGHT_SIDE_CONTENT} from '../Home'
 
 
 const Topic = ({classes, match}) => {

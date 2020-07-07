@@ -3,7 +3,7 @@ import React from 'react';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 
-import Bullet from "../etc/Bullet";
+import Bullet from "../Bullet";
 
 
 const Header = ({classes}) => {

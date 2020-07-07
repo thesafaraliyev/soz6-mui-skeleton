@@ -40,6 +40,38 @@ export const LEFT_SIDE_CONTENT = [
         count: 2,
     },
 ];
+export const RIGHT_SIDE_CONTENT = [
+    {
+        id: 1,
+        title: 'avropaya türkiye vasitesile gediş',
+        slug: 'avropaya-turkiye-vasitesile-gedis',
+        count: 3,
+    },
+    {
+        id: 2,
+        title: 'bunun kimi qafqaz folk musiqilər',
+        slug: 'bunun-kimi-qafqaz-folk-musiqiler',
+        count: 0,
+    },
+    {
+        id: 3,
+        title: 'souls-like oyunlar necə oynanılır?',
+        slug: 'souls-like-oyunlar-nece-oynanilir',
+        count: 4,
+    },
+    {
+        id: 4,
+        title: 'valyuta',
+        slug: 'valyuta',
+        count: 0,
+    },
+    {
+        id: 5,
+        title: 'walmart-dan noutbuk almaq',
+        slug: 'walmart-dan-noutbuk-almaq',
+        count: 2,
+    },
+];
 
 const Home = ({classes}) => {
 
