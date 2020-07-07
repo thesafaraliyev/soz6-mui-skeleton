@@ -30,7 +30,9 @@ const Topic = ({classes, match}) => {
                 <Toolbar variant={'dense'}/>
 
                 <div className={classes.header}>
-                    <Typography variant="h6" className={classes.headerText}>{slug}</Typography>
+                    <Typography variant="h6" className={classes.headerText}>
+                        {slug}
+                    </Typography>
 
                     <CategoryChipSet/>
 

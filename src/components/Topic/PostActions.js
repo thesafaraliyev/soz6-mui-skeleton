@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import IconButton from "@material-ui/core/IconButton";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 
@@ -30,7 +30,7 @@ const PostActions = ({classes}) => {
 
             <Tooltip title="favori">
                 <IconButton color="primary">
-                    <FavoriteIcon fontSize={'small'}/>
+                    <FavoriteBorderOutlinedIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
 
