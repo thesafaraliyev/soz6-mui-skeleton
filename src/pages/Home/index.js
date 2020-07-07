@@ -4,8 +4,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import LeftSide from "../components/Navigation/LeftSide";
-import ContentCard from "../components/Home/ContentCard";
+import LeftSide from "../../components/Navigation/LeftSide";
+import ContentCard from "../../components/Home/ContentCard";
 
 
 export const LEFT_SIDE_CONTENT = [
