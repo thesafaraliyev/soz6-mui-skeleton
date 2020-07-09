@@ -8,33 +8,22 @@ import SearchIcon from '@material-ui/icons/Search';
 import PortableWifiOffIcon from '@material-ui/icons/PortableWifiOff';
 import FaceIcon from '@material-ui/icons/Face';
 import Tooltip from "@material-ui/core/Tooltip";
+import SmsOutLinedIcon from "@material-ui/icons/SmsOutlined";
+import CardActions from "@material-ui/core/CardActions";
 
 
 const Actions = ({classes}) => {
     return (
         <div className={classes.buttonGroup}>
-            <Tooltip title="əjdaha lazımdı">
+            <Tooltip title="mesaj">
                 <IconButton>
-                    <PublishIcon fontSize={'small'}/>
+                    <SmsOutLinedIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
 
             <Tooltip title="izlə">
                 <IconButton>
                     <VisibilityOutlinedIcon fontSize={'small'}/>
-                </IconButton>
-            </Tooltip>
-
-
-            <Tooltip title="lələ">
-                <IconButton>
-                    <PortableWifiOffIcon fontSize={'small'}/>
-                </IconButton>
-            </Tooltip>
-
-            <Tooltip title="mən">
-                <IconButton>
-                    <FaceIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
 
@@ -52,7 +41,7 @@ const Actions = ({classes}) => {
 
 const styles = theme => ({
     buttonGroup: {
-        padding: theme.spacing(0.5, 0),
+        // padding: theme.spacing(0.5, 0),
     },
 });
 
