@@ -9,15 +9,15 @@ import Avatar from "@material-ui/core/Avatar";
 import CardActions from "../../components/Advice/CardActions";
 import CategoryChipSet from "../../components/Topic/CategoryChipSet";
 
-import Divider from "@material-ui/core/Divider";
+// import Divider from "@material-ui/core/Divider";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Paper from "@material-ui/core/Paper";
+// import Paper from "@material-ui/core/Paper";
 
 const PostCard = ({classes, data}) => {
     return (
-        <Card className={classes.root} elevation={0} variant='outlined'>
+        <div className={classes.root}>
             <CardHeader
                 avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -42,7 +42,7 @@ const PostCard = ({classes, data}) => {
 
             {/* post content */}
             <CardContent className={classes.cardContent}>
-                <Typography variant="body2" color="primary" component="p">
+                <Typography variant="body2" component="p">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                     when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -56,7 +56,7 @@ const PostCard = ({classes, data}) => {
 
             <CardActions/>
 
-        </Card>
+        </div>
 
     );
 };
@@ -64,11 +64,11 @@ const PostCard = ({classes, data}) => {
 
 const styles = theme => ({
     root: {
-        padding: theme.spacing(1, 1.5),
-        marginBottom: theme.spacing(1),
-        [theme.breakpoints.down('xs')]: {
-            padding: theme.spacing(0.5, 1),
-        },
+        // padding: theme.spacing(1, 1.5),
+        // marginBottom: theme.spacing(1),
+        // [theme.breakpoints.down('xs')]: {
+        //     padding: theme.spacing(0.5, 1),
+        // },
     },
     avatar: {
         // width: theme.spacing(4),

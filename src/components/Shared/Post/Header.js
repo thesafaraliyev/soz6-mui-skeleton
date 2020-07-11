@@ -8,7 +8,7 @@ import Bullet from "../Bullet";
 
 const Header = ({classes}) => {
     return (
-        <Typography className={classes.title} color="textSecondary">
+        <Typography className={classes.title} >
             kafkanın playboy jurnalları <Bullet/> September 14, 2016 <Bullet/> #123456789
         </Typography>
     );
@@ -17,10 +17,7 @@ const Header = ({classes}) => {
 const styles = theme => ({
     title: {
         fontSize: '13px',
-        margin: theme.spacing(1, 1.5),
-        [theme.breakpoints.down('xs')]: {
-            margin: theme.spacing(0.5, 1),
-        },
+        fontWeight: 600,
     },
 });
 

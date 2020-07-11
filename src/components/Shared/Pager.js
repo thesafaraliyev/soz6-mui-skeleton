@@ -11,12 +11,13 @@ const Pager = ({classes, count = 10}) => {
 
 const styles = theme => ({
     pagination: {
-        '& > *': {
-            marginTop: theme.spacing(2),
-        },
+        padding: theme.spacing(2, 0),
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(1, 0),
+        },
     }
 });
 

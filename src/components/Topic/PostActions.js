@@ -17,19 +17,19 @@ const PostActions = ({classes}) => {
     return (
         <CardActions className={classes.classActions}>
             <Tooltip title="əjdaha">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <ArrowUpwardIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
 
             <Tooltip title="umbay">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <ArrowDownwardIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
 
             <Tooltip title="favori">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <FavoriteBorderOutlinedIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
@@ -37,13 +37,13 @@ const PostActions = ({classes}) => {
             <Bullet/>
 
             <Tooltip title="paylaş">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <ShareIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
 
             <Tooltip title="digər">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <MoreHorizOutlinedIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
@@ -55,7 +55,6 @@ const PostActions = ({classes}) => {
 const styles = theme => ({
     classActions: {
         padding: theme.spacing(0),
-        margin: theme.spacing(0.5, 1.5),
         [theme.breakpoints.down('xs')]: {
             display: 'flex',
             justifyContent: 'center',

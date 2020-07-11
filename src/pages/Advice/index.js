@@ -38,7 +38,7 @@ const Advice = ({classes, match}) => {
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        padding: theme.spacing(1, 2),
+        padding: theme.spacing(2),
         marginBottom: theme.spacing(5),
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(1, 1),

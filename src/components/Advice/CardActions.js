@@ -18,13 +18,13 @@ const Actions = ({classes}) => {
     return (
         <CardActions className={classes.classActions}>
             <Tooltip title="əjdaha">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <ArrowUpwardIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
 
             <Tooltip title="umbay">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <ArrowDownwardIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
@@ -32,18 +32,18 @@ const Actions = ({classes}) => {
             <Bullet/>
 
             <Tooltip title="mesaj">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <SmsOutLinedIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
             <Tooltip title="mesaj">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <VisibilityOutlinedIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
 
             <Tooltip title="googlla">
-                <IconButton color="primary">
+                <IconButton color="inherit">
                     <SearchIcon fontSize={'small'}/>
                 </IconButton>
             </Tooltip>
@@ -55,7 +55,7 @@ const Actions = ({classes}) => {
 
 const styles = theme => ({
     classActions: {
-        padding: theme.spacing(0),
+        padding: theme.spacing(1, 0),
         [theme.breakpoints.down('xs')]: {
             display: 'flex',
             justifyContent: 'center',

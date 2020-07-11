@@ -16,7 +16,7 @@ const Index = ({classes}) => {
 
             {/* post content */}
             <CardContent className={classes.contentCard}>
-                <Typography variant="body2" color="primary" component="p">
+                <Typography variant="body2" component="p">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                     when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -35,16 +35,16 @@ const Index = ({classes}) => {
 
 const styles = theme => ({
     root: {
-        // ...theme.typography.button,
-        // backgroundColor: theme.palette.background.paper,
-        marginBottom: theme.spacing(2),
+        padding: theme.spacing(2),
+        // marginBottom: theme.spacing(2),
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(1),
+        },
     },
     contentCard: {
-        margin: theme.spacing(0, 1.5),
-        padding: theme.spacing(0),
+        padding: theme.spacing(1, 0),
         [theme.breakpoints.down('xs')]: {
-            // padding: theme.spacing(0, 1),
-            margin: theme.spacing(1),
+            padding: theme.spacing(0.5, 0),
         },
     },
 });

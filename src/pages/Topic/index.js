@@ -1,20 +1,16 @@
 import React from 'react';
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
 import Pager from "../../components/Shared/Pager";
 import Toolbar from "@material-ui/core/Toolbar";
 
 import LeftSide from "../../components/Navigation/LeftSide";
 import RightSide from "../../components/Navigation/RightSide";
 import PostCard from "../../components/Topic/PostCard";
-import Actions from "../../components/Topic/Actions";
-import CategoryChipSet from "../../components/Topic/CategoryChipSet";
+import Header from "../../components/Topic/Header";
 
 import {LEFT_SIDE_CONTENT} from '../Home'
 import {RIGHT_SIDE_CONTENT} from '../Home'
-
 
 const Topic = ({classes, match}) => {
     const slug = match.params.slug;
@@ -29,31 +25,18 @@ const Topic = ({classes, match}) => {
             <main className={classes.content}>
                 <Toolbar variant={'dense'}/>
 
-                <div className={classes.header}>
-                    <Typography variant="h6" className={classes.headerText}>
-                        {slug}
-                    </Typography>
+                <Header topic={{slug}}/>
 
-                    <CategoryChipSet/>
+                <PostCard/>
+                <PostCard/>
+                <PostCard/>
+                <PostCard/>
+                <PostCard/>
+                <PostCard/>
+                <PostCard/>
+                <PostCard/>
 
-                    <Actions/>
-                </div>
-
-
-                <div className={classes.postCard}>
-                    <PostCard/>
-                    <PostCard/>
-                    <PostCard/>
-                    <PostCard/>
-                    <PostCard/>
-                    <PostCard/>
-                    <PostCard/>
-                    <PostCard/>
-                    <PostCard/>
-                    <PostCard/>
-                </div>
-
-                <Divider/>
+                {/*<Divider/>*/}
 
                 <Pager count={15}/>
 
@@ -68,17 +51,18 @@ const Topic = ({classes, match}) => {
 
 
 const styles = theme => ({
-    header: {
-    },
-    postCard: {
-    },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(1, 2),
-        marginBottom: theme.spacing(5),
+        padding: theme.spacing(2),
+        '& > div:not(:first-child):not(:last-child)': {
+            marginBottom: theme.spacing(2)
+        },
         [theme.breakpoints.down('xs')]: {
-            padding: theme.spacing(1, 1),
-            marginBottom: theme.spacing(10)
+            padding: theme.spacing(1),
+            marginBottom: theme.spacing(7),
+            '& > div:not(:first-child):not(:last-child)': {
+                marginBottom: theme.spacing(1)
+            },
         },
     },
 });
