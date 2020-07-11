@@ -8,6 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // nav
 import Header from "../components/Navigation/Header";
 import MobileBottom from "../components/Navigation/MobileBottom";
+import ScrollIntoView from "../components/Navigation/ScrollIntoView";
 
 // pages
 import Home from "./Home";
@@ -44,21 +45,23 @@ const Base = ({classes}) => {
                 </AppBar>
 
                 {/*<UserContext.Provider value={currentUser}>*/}
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Route exact path="/account/" component={Account}/>
-                    <Route exact path="/settings/" component={Settings}/>
-                    <Route exact path="/profile/" component={Profile}/>
-                    <Route exact path="/messages/" component={Messages}/>
-                    <Route exact path="/notifications/" component={Notifications}/>
+                <ScrollIntoView>
+                    <Switch>
+                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/account/" component={Account}/>
+                        <Route exact path="/settings/" component={Settings}/>
+                        <Route exact path="/profile/" component={Profile}/>
+                        <Route exact path="/messages/" component={Messages}/>
+                        <Route exact path="/notifications/" component={Notifications}/>
 
-                    <Route exact path="/today/" component={Today}/>
-                    {/*<Route exact path="/top/" component={Top}/>*/}
-                    <Route exact path="/topic/:slug/" component={Topic}/>
+                        <Route exact path="/today/" component={Today}/>
+                        {/*<Route exact path="/top/" component={Top}/>*/}
+                        <Route exact path="/topic/:slug/" component={Topic}/>
 
-                    <Route exact path="/advice/:slug/" component={Advice}/>
-                    {/*<Route exact path="/advices/" component={Advices}/>*/}
-                </Switch>
+                        <Route exact path="/advice/:slug/" component={Advice}/>
+                        {/*<Route exact path="/advices/" component={Advices}/>*/}
+                    </Switch>
+                </ScrollIntoView>
                 {/*</UserContext.Provider>*/}
 
             </Router>
