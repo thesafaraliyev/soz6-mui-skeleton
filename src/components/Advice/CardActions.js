@@ -55,7 +55,7 @@ const Actions = ({classes}) => {
 
 const styles = theme => ({
     classActions: {
-        padding: theme.spacing(1, 0),
+        padding: theme.spacing(0),
         [theme.breakpoints.down('xs')]: {
             display: 'flex',
             justifyContent: 'center',

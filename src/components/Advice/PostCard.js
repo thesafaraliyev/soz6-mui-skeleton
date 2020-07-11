@@ -2,43 +2,26 @@ import React from 'react';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 
+import Bullet from "../Shared/Bullet";
 import CardActions from "../../components/Advice/CardActions";
-import CategoryChipSet from "../../components/Topic/CategoryChipSet";
-
-// import Divider from "@material-ui/core/Divider";
-import CardHeader from "@material-ui/core/CardHeader";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-// import Paper from "@material-ui/core/Paper";
 
 const PostCard = ({classes, data}) => {
     return (
         <div className={classes.root}>
-            <CardHeader
-                avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                        K
-                    </Avatar>
-                }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon/>
-                    </IconButton>
-                }
-                title={data.authorName}
-                subheader="September 14, 2016"
-                className={classes.cardHeader}
-            />
-
-            <Typography variant="body1" className={classes.adviceTitle}>
+            <Typography variant="subtitle1" className={classes.adviceTitle}>
                 {data.slug}
             </Typography>
-            <CategoryChipSet/>
 
+            <div className={classes.cardHeader}>
+                <Avatar aria-label="recipe" className={classes.avatar}>
+                </Avatar>
+                <Typography className={classes.authorTitle} >
+                    kafkanın playboy jurnalları <Bullet/> September 14, 2016
+                </Typography>
+            </div>
 
             {/* post content */}
             <CardContent className={classes.cardContent}>
@@ -64,27 +47,26 @@ const PostCard = ({classes, data}) => {
 
 const styles = theme => ({
     root: {
-        // padding: theme.spacing(1, 1.5),
-        // marginBottom: theme.spacing(1),
-        // [theme.breakpoints.down('xs')]: {
-        //     padding: theme.spacing(0.5, 1),
-        // },
-    },
-    avatar: {
-        // width: theme.spacing(4),
-        // height: theme.spacing(4),
-    },
-    cardHeader: {
-        padding: theme.spacing(1, 0),
     },
     adviceTitle: {
-        // padding: theme.spacing(1, 1.5, 0, 1.5),
-        fontSize: '1.3rem',
+        padding: theme.spacing(0, 0, 1, 0),
+    },
+    authorTitle: {
+        marginLeft: theme.spacing(1),
+        fontSize: '13px',
+        fontWeight: 600,
+    },
+    avatar: {
+        width: theme.spacing(2.125),
+        height: theme.spacing(2.125),
+    },
+    cardHeader: {
+        display: 'flex',
     },
     cardContent: {
-        padding: theme.spacing(0.5, 0),
+        padding: theme.spacing(1, 0),
         [theme.breakpoints.down('xs')]: {
-            padding: theme.spacing(0),
+            padding: theme.spacing(0.5, 0),
         },
     },
 });

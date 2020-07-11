@@ -12,7 +12,7 @@ import Header from "../Shared/Post/Header";
 const ContentCard = ({classes}) => {
     return (
         <Card className={classes.root} variant="outlined">
-            <Typography variant="body1" className={classes.topicTitle}>
+            <Typography variant="subtitle1" className={classes.topicTitle}>
                 hər gün kənara bir manat atmaq
             </Typography>
 
@@ -52,7 +52,6 @@ const styles = theme => ({
     },
     topicTitle: {
         padding: theme.spacing(0, 0, 1, 0),
-        fontSize: '1.1rem',
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(0, 0, 0.5, 0),
         },

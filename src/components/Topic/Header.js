@@ -25,9 +25,9 @@ const Header = ({classes, topic}) => {
             <Divider/>
 
             <CardActions className={classes.cardActions}>
-                {/*<Button size="small">*/}
-                {/*    əjdaha lazımdı*/}
-                {/*</Button>*/}
+                <Button size="small">
+                    əjdaha lazımdı
+                </Button>
                 <Button size="small">
                     bu gün
                 </Button>

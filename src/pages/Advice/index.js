@@ -22,7 +22,7 @@ const Advice = ({classes, match}) => {
 
 
             {/* content here */}
-            <main className={classes.root}>
+            <main className={classes.content}>
                 <Toolbar variant={'dense'}/>
 
                 <ContentCard data={data}/>
@@ -36,13 +36,12 @@ const Advice = ({classes, match}) => {
 
 
 const styles = theme => ({
-    root: {
+    content: {
         flexGrow: 1,
         padding: theme.spacing(2),
-        marginBottom: theme.spacing(5),
         [theme.breakpoints.down('xs')]: {
-            padding: theme.spacing(1, 1),
-            marginBottom: theme.spacing(10)
+            padding: theme.spacing(1),
+            marginBottom: theme.spacing(7),
         },
     },
 });

@@ -1,12 +1,13 @@
 import React from 'react';
 
 import withStyles from "@material-ui/core/styles/withStyles";
+import Card from "@material-ui/core/Card";
+import TextField from "@material-ui/core/TextField";
+import Divider from "@material-ui/core/Divider";
 
 import PostCard from "../../components/Advice/PostCard";
 import Comment from "../../components/Advice/Comment";
-import Divider from "@material-ui/core/Divider";
-import Card from "@material-ui/core/Card";
-import TextField from "@material-ui/core/TextField";
+
 
 function nestComments(commentList) {
     const commentMap = {};
@@ -137,20 +138,20 @@ const ContentCard = ({classes, data}) => {
     });
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} variant='outlined'>
             <PostCard data={data}/>
 
-            <TextField
-                id="outlined-multiline-static"
-                label="adam balası kimi məsləhət ver.."
-                multiline
-                rows={4}
-                variant="outlined"
-                fullWidth
-                placeholder='Some text here'
-            />
+            {/*<TextField*/}
+            {/*    id="outlined-multiline-static"*/}
+            {/*    label="adam balası kimi məsləhət ver.."*/}
+            {/*    multiline*/}
+            {/*    rows={4}*/}
+            {/*    variant="outlined"*/}
+            {/*    fullWidth*/}
+            {/*    placeholder='Some text here'*/}
+            {/*/>*/}
 
-            {/*<Divider/>*/}
+            <Divider/>
 
             {nestedComments}
         </Card>
@@ -160,8 +161,7 @@ const ContentCard = ({classes, data}) => {
 
 const styles = theme => ({
     root: {
-        padding: theme.spacing(1, 1.5),
-        marginBottom: theme.spacing(1),
+        padding: theme.spacing(1, 2),
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(0.5, 1),
         },
