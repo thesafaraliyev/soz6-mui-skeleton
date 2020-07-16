@@ -1,8 +1,15 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+
 import 'fontsource-roboto';
 
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
+import {makeStyles} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+import {light, dark} from "./components/Theme/Palette";
 import MobileBottom from "./components/Navigation/MobileBottom";
 import Header from "./components/Navigation/Header";
 import ScrollIntoView from "./components/Navigation/ScrollIntoView";
@@ -15,24 +22,16 @@ import Notifications from "./pages/Notifications";
 import Today from "./pages/Topic/Today";
 import Topic from "./pages/Topic";
 import Advice from "./pages/Advice";
-import {makeStyles} from '@material-ui/core/styles';
 
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
     const classes = useStyles();
+
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-    console.log(prefersDarkMode)
 
     const theme = React.useMemo(
         () =>
-            createMuiTheme({
-                palette: {
-                    type: prefersDarkMode ? 'dark' : 'light',
-                },
-            }),
+            createMuiTheme(prefersDarkMode ? light : dark),
         [prefersDarkMode],
     );
 

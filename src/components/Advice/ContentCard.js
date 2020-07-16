@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
-import TextField from "@material-ui/core/TextField";
-
-import Comment from "../../components/Advice/Comment";
 import Divider from "@material-ui/core/Divider";
 
+import Comment from "../../components/Advice/Comment";
+import Editor from "../Shared/Editor";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/Button";
 
 function nestComments(commentList) {
     const commentMap = {};
@@ -130,24 +132,35 @@ const ContentCard = ({classes, data}) => {
             text: "That honestly sounds like a pretty amazing rock."
         },
     ];
+    const [replyText, setReplyText] = useState('');
+    const [commentList, setCommentList] = useState(comments);
 
 
     const nestedComments = nestComments(comments).map(comment => {
         return <Comment comment={comment} key={comment.id}/>;
     });
 
+
+    const handleSendClick = (event) => {
+        console.log(event.target)
+    }
+
+
+    const saveButtons = (
+        <div className={classes.saveButtons}>
+            <Button onClick={() => handleSendClick} color='secondary' variant='contained' size='small'
+                    disabled={!replyText.trim()}>
+                göndər
+            </Button>
+            {/*</ButtonGroup>*/}
+        </div>
+    );
+
+
+
     return (
         <Card className={classes.root} variant='outlined'>
-
-            <TextField
-                id="outlined-multiline-static"
-                label="adam balası kimi məsləhət ver.."
-                multiline
-                rows={4}
-                variant="outlined"
-                fullWidth
-                placeholder='Some text here'
-            />
+            <Editor actions={saveButtons} setText={setReplyText}/>
 
             <Divider className={classes.divider}/>
 
@@ -168,6 +181,12 @@ const styles = theme => ({
         margin: theme.spacing(2, 0),
         [theme.breakpoints.down('xs')]: {
             margin: theme.spacing(1, 0),
+        },
+    },
+    saveButtons: {
+        textAlign: 'right',
+        '& > :not(:first-child):not(:last-child)': {
+            marginRight: theme.spacing(0.5)
         },
     },
 });

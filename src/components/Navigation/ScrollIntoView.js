@@ -7,7 +7,8 @@ const ScrollIntoView = ({children, location}) => {
 
     useEffect(() => {
         if (prevLocation.current !== location.pathname) {
-            window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+            // window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+            window.scrollTo({top: 0, left: 0});
             prevLocation.current = location.pathname;
         }
     }, [location]);

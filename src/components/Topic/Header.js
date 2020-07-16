@@ -26,7 +26,7 @@ const Header = ({classes, topic}) => {
 
             <CardActions className={classes.cardActions}>
                 <Button size="small">
-                    əjdaha lazımdı
+                    əjdaha
                 </Button>
                 <Button size="small">
                     bu gün

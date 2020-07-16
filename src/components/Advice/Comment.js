@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
@@ -11,12 +11,68 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ReplyIcon from "@material-ui/icons/Reply";
 
 import Bullet from "../Shared/Bullet";
+import Editor from "../Shared/Editor";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 
 const Comment = ({classes, comment}) => {
-    const nestedComments = (comment.children || []).map(comment => {
+    const [openEditor, setOpenEditor] = useState(false);
+    const [checked, setChecked] = useState(false);
+    const [replyText, setReplyText] = useState('');
+    const [commentList, setCommentList] = useState(comment);
+
+    const handleCheckBoxChange = (event) => {
+        setChecked(event.target.checked);
+    };
+
+    const handleEditorToggle = () => {
+        setOpenEditor(!openEditor)
+        setReplyText('')
+    }
+
+
+    const handleSendClick = () => {
+        comment.children = comment.children || [];
+        comment.children.push({id: 25, parentId: comment.id, text: replyText})
+
+        setCommentList(comment)
+        setOpenEditor(false)
+    }
+
+    const nestedComments = (commentList.children || []).map(comment => {
         return <Comment comment={comment} classes={classes} key={comment.id}/>;
     });
+
+    const saveButtons = (
+        <div className={classes.saveButtons}>
+            <FormControlLabel
+                value="end"
+                control={<Checkbox checked={checked} onChange={handleCheckBoxChange}/>}
+                label="gizli"
+                labelPlacement="end"
+            />
+            {/*<ButtonGroup size='small'>*/}
+            <Button
+                onClick={() => {
+                    setOpenEditor(false)
+                    setReplyText('')
+                }}
+                variant='text'
+                size='small'
+            >
+                bağla
+            </Button>
+
+            <Button onClick={handleSendClick} color='secondary' variant='contained' size='small'
+                    disabled={!replyText.trim()}>
+                göndər
+            </Button>
+            {/*</ButtonGroup>*/}
+        </div>
+    );
+
 
     return (
         <div className={classes.root}>
@@ -52,11 +108,13 @@ const Comment = ({classes, comment}) => {
                 <Bullet/>
 
                 <Tooltip title="mesaj">
-                    <IconButton>
+                    <IconButton onClick={handleEditorToggle}>
                         <ReplyIcon fontSize={'small'}/>
                     </IconButton>
                 </Tooltip>
             </div>
+
+            {openEditor && <Editor setText={setReplyText} actions={saveButtons}/>}
 
             {nestedComments}
         </div>
@@ -68,14 +126,13 @@ const styles = theme => ({
     root: {
         marginTop: theme.spacing(2),
         paddingLeft: theme.spacing(2),
-        borderLeft: '1px solid rgba(255, 255, 255, 0.23)',
-        // borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
+        borderLeft: `1px solid ${theme.palette.divider}`,
         [theme.breakpoints.down('xs')]: {
             paddingLeft: theme.spacing(1.5),
         },
     },
     header: {
-      display: 'flex',
+        display: 'flex',
     },
     avatar: {
         width: theme.spacing(2.125),
@@ -95,8 +152,12 @@ const styles = theme => ({
             padding: theme.spacing(0.5, 0),
         },
     },
-    actions: {
-
+    actions: {},
+    saveButtons: {
+        textAlign: 'right',
+        '& > :not(:first-child):not(:last-child)': {
+            marginRight: theme.spacing(0.5)
+        },
     },
 });
 
