@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -7,16 +7,23 @@ import HelpIcon from '@material-ui/icons/Help';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import SmsIcon from '@material-ui/icons/Sms';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import withStyles from "@material-ui/core/styles/withStyles";
+
+import {NAV_EXCLUDED_URLS} from '../../App'
+import {makeStyles} from "@material-ui/core/styles";
 
 
-const MobileBottom = ({classes}) => {
+const MobileBottom = ({location}) => {
+    const classes = useStyles();
     const [bottomBarValue, setBottomBarValue] = useState(null);
 
     const handleBottomBarChange = (event, newValue) => {
         console.log(newValue)
         setBottomBarValue(newValue);
     };
+
+    if (NAV_EXCLUDED_URLS.includes(location.pathname)) {
+        return null;
+    }
 
 
     return (
@@ -64,11 +71,11 @@ const MobileBottom = ({classes}) => {
 };
 
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
-        // width: 500,
+
     },
-});
+}));
 
 
-export default withStyles(styles)(MobileBottom);
+export default withRouter(MobileBottom);

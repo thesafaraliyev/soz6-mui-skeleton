@@ -22,6 +22,15 @@ import Notifications from "./pages/Notifications";
 import Today from "./pages/Topic/Today";
 import Topic from "./pages/Topic";
 import Advice from "./pages/Advice";
+import SignIn from './pages/Auth/SignIn';
+import SignUp from './pages/Auth/SignUp';
+
+
+export const UserContext = React.createContext();
+export const NAV_EXCLUDED_URLS = [
+    '/signIn/',
+    '/signUp/',
+];
 
 
 function App() {
@@ -31,10 +40,12 @@ function App() {
 
     const theme = React.useMemo(
         () =>
-            createMuiTheme(prefersDarkMode ? light : dark),
+            createMuiTheme(!prefersDarkMode ? light : dark),
         [prefersDarkMode],
     );
 
+    // const currentUser = {username: 'Elshan'};
+    const currentUser = null;
 
     return (
         <ThemeProvider theme={theme}>
@@ -49,28 +60,31 @@ function App() {
 
                     {/* top bar */}
                     <AppBar position="fixed" className={classes.appBar}>
-                        <Header/>
+                        <Header user={currentUser}/>
                     </AppBar>
 
-                    {/*<UserContext.Provider value={currentUser}>*/}
-                    <ScrollIntoView>
-                        <Switch>
-                            <Route exact path="/" component={Home}/>
-                            <Route exact path="/account/" component={Account}/>
-                            <Route exact path="/settings/" component={Settings}/>
-                            <Route exact path="/profile/" component={Profile}/>
-                            <Route exact path="/messages/" component={Messages}/>
-                            <Route exact path="/notifications/" component={Notifications}/>
+                    <UserContext.Provider value={currentUser}>
+                        <ScrollIntoView>
+                            <Switch>
+                                <Route exact path="/signIn/" component={SignIn}/>
+                                <Route exact path="/signUp/" component={SignUp}/>
 
-                            <Route exact path="/today/" component={Today}/>
-                            {/*<Route exact path="/top/" component={Top}/>*/}
-                            <Route exact path="/topic/:slug/" component={Topic}/>
+                                <Route exact path="/" component={Home}/>
+                                <Route exact path="/account/" component={Account}/>
+                                <Route exact path="/settings/" component={Settings}/>
+                                <Route exact path="/profile/" component={Profile}/>
+                                <Route exact path="/messages/" component={Messages}/>
+                                <Route exact path="/notifications/" component={Notifications}/>
 
-                            <Route exact path="/advice/:slug/" component={Advice}/>
-                            {/*<Route exact path="/advices/" component={Advices}/>*/}
-                        </Switch>
-                    </ScrollIntoView>
-                    {/*</UserContext.Provider>*/}
+                                <Route exact path="/today/" component={Today}/>
+                                {/*<Route exact path="/top/" component={Top}/>*/}
+                                <Route exact path="/topic/:slug/" component={Topic}/>
+
+                                <Route exact path="/advice/:slug/" component={Advice}/>
+                                {/*<Route exact path="/advices/" component={Advices}/>*/}
+                            </Switch>
+                        </ScrollIntoView>
+                    </UserContext.Provider>
 
                 </Router>
             </div>

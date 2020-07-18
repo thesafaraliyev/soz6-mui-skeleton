@@ -1,6 +1,5 @@
 import React from 'react';
-import {Link, withRouter} from "react-router-dom";
-
+import {Link} from "react-router-dom";
 
 import {fade} from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,26 +13,18 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import MoreIcon from '@material-ui/icons/MoreVert';
 import SportsKabaddiOutlinedIcon from '@material-ui/icons/SportsKabaddiOutlined';
 import withStyles from "@material-ui/core/styles/withStyles";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import SettingsIcon from '@material-ui/icons/Settings';
-import FaceIcon from '@material-ui/icons/Face';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
 
 
-import {NAV_EXCLUDED_URLS} from '../../App'
-
-const Header = ({classes, location, user}) => {
+const Header = ({classes, bottomBarRef}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
-    // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -45,24 +36,15 @@ const Header = ({classes, location, user}) => {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
-        // handleMobileMenuClose();
+        handleMobileMenuClose();
     };
 
-    // const handleMobileMenuOpen = (event) => {
-    //     setMobileMoreAnchorEl(event.currentTarget);
-    // };
-
-    const darkModeItem = (
-        <MenuItem onClick={handleMenuClose}>
-            <IconButton size='small'>
-                <Brightness4Icon/>
-            </IconButton>
-            Qaranıq rejim
-        </MenuItem>
-    );
+    const handleMobileMenuOpen = (event) => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
 
     const menuId = 'primary-search-account-menu';
-    const userDropdown = (
+    const renderMenu = (
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{vertical: 'top', horizontal: 'right'}}
@@ -72,52 +54,51 @@ const Header = ({classes, location, user}) => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            {user && <div>
-                <MenuItem onClick={handleMenuClose} component={Link} to={'/profile/'}>
-                    <IconButton size='small'>
-                        <FaceIcon/>
-                    </IconButton>
-                    mən
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose} component={Link} to={'/settings/'}>
-                    <IconButton size='small'>
-                        <SettingsIcon/>
-                    </IconButton>
-                    tənzimləmələr
-                </MenuItem>
-                <Divider/>
-                {darkModeItem}
-                <Divider/>
-                <MenuItem onClick={handleMenuClose}>
-                    <IconButton size='small'>
-                        <ExitToAppIcon/>
-                    </IconButton>
-                    çıxış
-                </MenuItem>
-            </div>}
-            {!user && <div>
-                {darkModeItem}
-                <Divider/>
-                <MenuItem
-                    onClick={handleMenuClose}
-                    // component={Link}
-                    // to={'/signIn/'}
-                >
-                    <IconButton size='small'>
-                        <ExitToAppIcon/>
-                    </IconButton>
-                    giriş / üzv ol
-                </MenuItem>
-            </div>}
-
+            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );
 
-
-    if (NAV_EXCLUDED_URLS.includes(location.pathname)) {
-        return null;
-    }
-
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem>
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                    <Badge badgeContent={4} color="secondary">
+                        <MailIcon/>
+                    </Badge>
+                </IconButton>
+                <p>Messages</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton aria-label="show 11 new notifications" color="inherit">
+                    <Badge badgeContent={11} color="secondary">
+                        <NotificationsIcon/>
+                    </Badge>
+                </IconButton>
+                <p>Notifications</p>
+            </MenuItem>
+            <MenuItem onClick={handleProfileMenuOpen}>
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle/>
+                </IconButton>
+                <p>Profile</p>
+            </MenuItem>
+        </Menu>
+    );
 
     return (
         <>
@@ -143,7 +124,7 @@ const Header = ({classes, location, user}) => {
                     component={Link}
                     to={'/'}
                 >
-                    Epic Sözlük
+                    EPIC Sözlük
                 </Typography>
 
 
@@ -164,44 +145,45 @@ const Header = ({classes, location, user}) => {
                 <div className={classes.grow}/>
 
                 {/* desktop right buttons */}
-                {user && <div className={classes.sectionDesktop}>
+                <div className={classes.sectionDesktop}>
+
                     <IconButton aria-label="show 4 new mails" color="inherit" component={Link} to={'/messages/'}>
-                        {/*<Badge badgeContent={4} color="secondary">*/}
-                        <MailIcon/>
-                        {/*</Badge>*/}
+                        <Badge badgeContent={4} color="secondary">
+                            <MailIcon/>
+                        </Badge>
                     </IconButton>
 
                     <IconButton aria-label="show 17 new notifications" color="inherit" component={Link}
                                 to={'/notifications/'}>
-                        {/*<Badge badgeContent={17} color="secondary">*/}
-                        <NotificationsIcon/>
-                        {/*</Badge>*/}
+                        <Badge badgeContent={17} color="secondary">
+                            <NotificationsIcon/>
+                        </Badge>
                     </IconButton>
 
-                    <Button
-                        edge='end'
-                        aria-controls={menuId}
-                        // aria-haspopup="true"
-                        onClick={handleProfileMenuOpen}
-                        color="inherit"
-                        startIcon={<AccountCircle style={{fontSize: '1.5rem'}}/>}
-                    >
-                        {user.username}
-                    </Button>
-
-                </div>}
-
-                {!user && <div className={classes.sectionDesktop}>
-                    <Button color="inherit" component={Link} to={'/signIn/'}>giriş</Button>
-                    <Button color="inherit" component={Link} to={'/signUp/'}>üzv ol</Button>
                     <IconButton
                         edge="end"
-                        color="inherit"
+                        aria-label="account of current user"
+                        aria-controls={menuId}
+                        aria-haspopup="true"
                         onClick={handleProfileMenuOpen}
+                        color="inherit"
                     >
-                        <AccountCircleIcon/>
+                        <AccountCircle/>
                     </IconButton>
-                </div>}
+                </div>
+
+
+                <div className={classes.sectionMobile}>
+                    <IconButton
+                        aria-label="show more"
+                        aria-controls={mobileMenuId}
+                        aria-haspopup="true"
+                        onClick={handleMobileMenuOpen}
+                        color="inherit"
+                    >
+                        <MoreIcon/>
+                    </IconButton>
+                </div>
 
 
                 {/* account */}
@@ -209,13 +191,16 @@ const Header = ({classes, location, user}) => {
                     edge="end"
                     className={classes.mobileAccountButton}
                     color="inherit"
-                    onClick={handleProfileMenuOpen}
+                    component={Link}
+                    to={'/account/'}
+                    // onClick={event => bottomBarRef.current.clearSelected()}
                 >
                     <AccountCircleIcon/>
                 </IconButton>
 
             </Toolbar>
-            {userDropdown}
+            {renderMobileMenu}
+            {renderMenu}
         </>
     );
 };
@@ -279,12 +264,9 @@ const styles = theme => ({
         },
     },
     sectionDesktop: {
-        // display: 'none',
-        [theme.breakpoints.down('sm')]: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
             display: 'flex',
-        },
-        [theme.breakpoints.down('xs')]: {
-            display: 'none',
         },
     },
     sectionMobile: {
@@ -305,4 +287,4 @@ const styles = theme => ({
 });
 
 
-export default withRouter(withStyles(styles)(Header));
+export default withStyles(styles)(Header);
