@@ -29,7 +29,7 @@ const MobileBottom = ({location}) => {
     return (
         <BottomNavigation
             value={bottomBarValue}
-            showLabels
+            // showLabels
             onChange={handleBottomBarChange}
             className={classes.root}
         >
@@ -61,7 +61,7 @@ const MobileBottom = ({location}) => {
             <BottomNavigationAction
                 component={Link}
                 to={'/advices/'}
-                label="məsləhətxana"
+                label="məsləhət"
                 value="advices"
                 icon={<HelpIcon/>}
             />

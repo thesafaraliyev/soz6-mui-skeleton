@@ -7,10 +7,14 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
+import {NavContext} from "../../App";
+
 
 const Editor = ({actions, setText}) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
+
+    const {setShown} = React.useContext(NavContext);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -38,6 +42,9 @@ const Editor = ({actions, setText}) => {
                     placeholder='Some text here'
                     onChange={handleTyping}
                     color='secondary'
+                    onFocus={() => setShown(false)}
+                    onBlur={() => setShown(true)}
+                    autoFocus
                 />
 
                 <div className={classes.mobileButtonGroup}>

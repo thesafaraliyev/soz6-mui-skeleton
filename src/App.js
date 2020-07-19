@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import 'fontsource-roboto';
@@ -8,6 +8,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Slide from "@material-ui/core/Slide";
 
 import {light, dark} from "./components/Theme/Palette";
 import MobileBottom from "./components/Navigation/MobileBottom";
@@ -26,7 +27,8 @@ import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
 
 
-export const UserContext = React.createContext();
+export const UserContext = createContext();
+export const NavContext = createContext();
 export const NAV_EXCLUDED_URLS = [
     '/signIn/',
     '/signUp/',
@@ -35,6 +37,7 @@ export const NAV_EXCLUDED_URLS = [
 
 function App() {
     const classes = useStyles();
+    const [shown, setShown] = useState(true);
 
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -53,39 +56,42 @@ function App() {
             <div className={classes.root}>
                 <Router>
 
-                    {/* bottom bar */}
-                    <AppBar position="fixed" className={classes.bottomNav}>
-                        <MobileBottom/>
-                    </AppBar>
+                    <NavContext.Provider value={{shown, setShown}}>
+                        {/* bottom bar */}
+                        <Slide direction="up" in={shown} mountOnEnter unmountOnExit>
+                            <AppBar position="fixed" className={classes.bottomNav}>
+                                <MobileBottom/>
+                            </AppBar>
+                        </Slide>
 
-                    {/* top bar */}
-                    <AppBar position="fixed" className={classes.appBar}>
-                        <Header user={currentUser}/>
-                    </AppBar>
+                        {/* top bar */}
+                        <AppBar position="fixed" className={classes.appBar}>
+                            <Header user={currentUser}/>
+                        </AppBar>
 
-                    <UserContext.Provider value={currentUser}>
-                        <ScrollIntoView>
-                            <Switch>
-                                <Route exact path="/signIn/" component={SignIn}/>
-                                <Route exact path="/signUp/" component={SignUp}/>
+                        <UserContext.Provider value={currentUser}>
+                            <ScrollIntoView>
+                                <Switch>
+                                    <Route exact path="/signIn/" component={SignIn}/>
+                                    <Route exact path="/signUp/" component={SignUp}/>
 
-                                <Route exact path="/" component={Home}/>
-                                <Route exact path="/account/" component={Account}/>
-                                <Route exact path="/settings/" component={Settings}/>
-                                <Route exact path="/profile/" component={Profile}/>
-                                <Route exact path="/messages/" component={Messages}/>
-                                <Route exact path="/notifications/" component={Notifications}/>
+                                    <Route exact path="/" component={Home}/>
+                                    <Route exact path="/account/" component={Account}/>
+                                    <Route exact path="/settings/" component={Settings}/>
+                                    <Route exact path="/profile/" component={Profile}/>
+                                    <Route exact path="/messages/" component={Messages}/>
+                                    <Route exact path="/notifications/" component={Notifications}/>
 
-                                <Route exact path="/today/" component={Today}/>
-                                {/*<Route exact path="/top/" component={Top}/>*/}
-                                <Route exact path="/topic/:slug/" component={Topic}/>
+                                    <Route exact path="/today/" component={Today}/>
+                                    {/*<Route exact path="/top/" component={Top}/>*/}
+                                    <Route exact path="/topic/:slug/" component={Topic}/>
 
-                                <Route exact path="/advice/:slug/" component={Advice}/>
-                                {/*<Route exact path="/advices/" component={Advices}/>*/}
-                            </Switch>
-                        </ScrollIntoView>
-                    </UserContext.Provider>
-
+                                    <Route exact path="/advice/:slug/" component={Advice}/>
+                                    {/*<Route exact path="/advices/" component={Advices}/>*/}
+                                </Switch>
+                            </ScrollIntoView>
+                        </UserContext.Provider>
+                    </NavContext.Provider>
                 </Router>
             </div>
         </ThemeProvider>
